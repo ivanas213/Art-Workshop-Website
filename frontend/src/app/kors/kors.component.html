@@ -1,0 +1,72 @@
+<header fxLayout="row">
+    <img mat-card-image [src]="logo" alt=""  class="logo">
+    <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+<body>
+    <div class="ispod" fxLayout="row">
+        <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="profil()" >Profil</button>
+        <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="moje_radionice()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="korisnici()" style="background-color:#8956c8" >Korisnici</button>
+
+        <div fxFlex="90"></div>
+        <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova" (click)="registracija()">Registruj se</button>
+
+        <button mat-button *ngIf="tip=='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()" >Uloguj se</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="promena_lozinke()" >Promena lozinke</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="odjava()" >Odjava</button>
+
+    </div>
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened></mat-drawer>
+        <mat-drawer-content>
+        
+        <table>
+            <tr>
+                <th>
+                    Slika
+                </th>
+                <th>
+                    Id
+                </th>
+    
+                <th>
+                    Ime
+                </th>
+                <th>
+                    Prezime
+                </th>
+                <th>
+                    Korisnicko ime
+                </th>
+                <th>
+                    Lozinka
+                </th>
+                <th>
+                    Tip
+                </th>
+                 <th>
+                    Telefon
+                </th> <th>
+                    Email
+                </th>
+                <th>
+                    Naziv organizacije
+                </th>
+                <th>
+                    Adresa sedista organizacije
+                </th>
+                <th>
+                    Maticni broj organizacije
+                </th>
+            </tr>
+           
+            <tr *ngFor="let k od svi_korisnici">
+             
+            </tr>
+
+        </table>
+        </mat-drawer-content>
+      </mat-drawer-container>
+    
+    
+</body>

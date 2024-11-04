@@ -1,0 +1,93 @@
+<header fxLayout="row">
+    <img mat-card-image [src]="logo" alt=""  class="logo">
+    <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+<body>
+    <div class="ispod" fxLayout="row">
+        <button mat-button *ngIf="tip=='ucesnik' || tip=='organizator'"  type="submit" fxFlex="7" class="bela_slova" (click)="profil()" >Profil</button>
+        <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="moje_radionice()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="korisnici()" >Korisnici</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="rad()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="predlog()" >Predlozi za radionice</button>
+
+        <div fxFlex="90"></div>
+        <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova" (click)="registracija()">Registruj se</button>
+
+        <button mat-button *ngIf="tip=='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()" >Uloguj se</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="promena_lozinke()" >Promena lozinke</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="odjava()" >Odjava</button>
+
+    </div>
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened></mat-drawer>
+        <mat-drawer-content>
+            <div fxLayout="column">
+                <table *ngFor="let r of zahtevi" matTable fxFlex="100" >
+                
+     
+                 <tr> 
+                     <td>Id</td>
+                     <td>{{r.id}}</td>
+                 </tr>
+                 <tr> 
+                     <td>Slika</td>
+                     <td>  <img [src]="r.slika" height="100px" width="75px" class="center"><br>
+                     </td>
+                 </tr>
+                 
+                 
+                 <tr> 
+                     <td>Naziv</td>
+                     <td>{{r.naziv}}</td>
+                 </tr>
+              
+                 <tr> 
+                     <td>Datum</td>
+                     <td>{{r.datum}}</td>
+                 </tr>
+
+                 <tr> 
+                     <td>Mesto</td>
+                     <td>{{r.mesto}}</td>
+                 </tr>
+                
+                 <tr> 
+                     <td>Opis</td>
+                     <td>{{r.opis}}</td>
+                 </tr>
+                
+                 <tr> 
+                     <td>Duzi opis</td>
+                     <td>{{r.duzi_opis}}</td>
+                 </tr>
+                 
+                 <tr> 
+                     <td>Slobodna mesta</td>
+                     <td>{{r.slobodna_mesta}}</td>
+                 </tr>
+                 
+     
+                 <tr> 
+                     <td>Organizator</td>
+                     <td>{{r.organizator}}</td>
+                 </tr>
+                 <tr> 
+                    <td>Status</td>
+                    <td>{{r.status}}</td>
+                </tr>
+                 <tr> 
+                     <td>Galerija</td>
+                     <td fxLayout="row"><div *ngFor="let s of r.galerija"> <img [src]="s" height="150hx" width="110px" class="center"></div></td> 
+                 </tr >
+                 <tr *ngIf="r.status=='nov'"><button (click)="prihvati(r)">Prihvati</button></tr>
+                 <tr *ngIf="r.status=='nov'"><button (click)="odbij(r)">Odbij</button></tr>
+                 <hr>
+                </table>
+                </div>
+        
+           
+        </mat-drawer-content>
+      </mat-drawer-container>
+    
+    
+</body>

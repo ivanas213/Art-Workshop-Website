@@ -1,0 +1,17 @@
+<div fxLayoutAlign="center center" fxFlexFill >
+    <mat-card fxFlex="25">
+        <mat-toolbar class="purple_white_center">
+            Logovanje
+        </mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" appInputStyle>
+            <mat-form-field>
+              <input matInput placeholder="Korisnicko ime"appInputStyle [(ngModel)]="korisnicko_ime" [ngModelOptions]="{standalone: true}" >
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="password" placeholder="Lozinka" appInputStyle [(ngModel)]="lozinka" [ngModelOptions]="{standalone: true}" >
+            </mat-form-field>
+            <button mat-raised-button type="submit" appInputStyle (click)="logovanje()">Uloguj se</button>
+        </form>
+        {{greska}}
+    </mat-card>
+  </div>

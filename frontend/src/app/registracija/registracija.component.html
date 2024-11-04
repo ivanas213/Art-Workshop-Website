@@ -1,0 +1,64 @@
+<header>Registracija</header>
+<body><div fxLayoutAlign="center center" fxFlexFill >
+    <mat-card fxFlex="100" >
+      <mat-toolbar class="purple_white_center" name="vrh">
+          Registracija
+      </mat-toolbar>
+      <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" appInputStyle >
+          <mat-form-field >
+            <input matInput placeholder="Ime" appInputStyle name="ime" [(ngModel)]="ime" >
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Prezime" name="prezime" appInputStyle [(ngModel)]="prezime" >
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Korisnicko ime" name="korisnicko_ime" appInputStyle [(ngModel)]="korisnicko_ime"  >
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Lozinka" name="lozinka" appInputStyle [(ngModel)]="lozinka"  >
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Potvrda lozinke" name="potvrda_lozinke" appInputStyle [(ngModel)]="potvrda_lozinke"  >
+          </mat-form-field>
+          <mat-checkbox  [(ngModel)]="organizator" name="org" >
+                Organizator
+          </mat-checkbox>
+          <mat-form-field>
+            <input matInput type="text" name="telefon" placeholder="Telefon" appInputStyle [(ngModel)]="telefon" >
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" name="email" placeholder="Email" appInputStyle [(ngModel)]="email"  >
+          </mat-form-field>
+          <div *ngIf="organizator">
+            <mat-form-field >
+              <input matInput type="text" name="naziv_org" placeholder="Naziv organizacije" appInputStyle [(ngModel)]="naziv_organizacije" >
+            </mat-form-field>
+            <mat-form-field >
+              <input matInput type="text" name="adresa_org" placeholder="Adresa sedista organizacije" appInputStyle [(ngModel)]="adresa_organizacije"  >
+            </mat-form-field>
+            <mat-form-field >
+              <input matInput type="text" name="id_org" placeholder="Maticni broj organizacije" appInputStyle [(ngModel)]="id_organizacije"  >
+            </mat-form-field>
+          </div>
+          <button mat-stroked-button   (click)="dodajSliku()">Izaberite sliku</button>
+          <div class="home-banner">
+            <div class="banner-container">
+                <img [src]="slika" height="150hx" width="110px" class="center"><br>
+
+            </div>
+          </div>
+          <mat-checkbox  [(ngModel)]="potvrdi_sliku" [ngModelOptions]="{standalone: true}">
+            Potvrdi sliku
+          </mat-checkbox>
+          <button mat-raised-button type="submit" appInputStyle (click)="registracija()">Registruj se</button>
+      </form>
+      <div class="greska">{{greska}}</div>
+      <div class="greska">{{greska2}}</div>
+      <div class="greska">{{lose_dimenzije_greska}}</div>
+      <div class="greska">{{lozinka_greska}}</div>
+
+  </mat-card>
+  
+  
+</div>
+</body>

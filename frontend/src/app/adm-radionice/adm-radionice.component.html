@@ -1,0 +1,107 @@
+<!-- Header sa slikom logotipa i imenom sajta -->
+<header fxLayout="row">
+    <img mat-card-image [src]="logo" alt="" class="logo">
+    <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+
+<body>
+    <!-- Navigacioni meni sa dugmadima za korisničke opcije -->
+    <div class="ispod" fxLayout="row">
+        <button mat-button *ngIf="tip=='ucesnik' || tip=='organizator'" type="submit" fxFlex="7" class="bela_slova" (click)="profil()">Profil</button>
+        <button mat-button *ngIf="tip=='ucesnik'" type="submit" fxFlex="7" class="bela_slova" (click)="moje_radionice()">Radionice</button>
+        <button mat-button *ngIf="tip=='admin'" type="submit" fxFlex="7" class="bela_slova" (click)="korisnici()">Korisnici</button>
+        <button mat-button *ngIf="tip=='admin'" type="submit" fxFlex="7" class="bela_slova" (click)="rad()">Radionice</button>
+        
+        <!-- Prostor između navigacionih dugmadi i opcija za registraciju/logovanje -->
+        <div fxFlex="90"></div>
+        
+        <!-- Opcije za registraciju, logovanje, promenu lozinke i odjavu -->
+        <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova">Registruj se</button>
+        <button mat-button *ngIf="tip=='neregistrovan'" type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()">Uloguj se</button>
+        <button mat-button *ngIf="tip!='neregistrovan'" type="submit" fxFlex="7" class="bela_slova" (click)="promena_lozinke()">Promena lozinke</button>
+        <button mat-button *ngIf="tip!='neregistrovan'" type="submit" fxFlex="7" class="bela_slova" (click)="odjava()">Odjava</button>
+    </div>
+
+    <!-- Glavni kontejner za prikaz radionica -->
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened></mat-drawer>
+        <mat-drawer-content>
+            <div fxLayout="column">
+               <table *ngFor="let r of sveRadionice" matTable fxFlex="100">
+               
+                <!-- Prikaz osnovnih informacija o radionici kada nije u režimu uređivanja -->
+                <tr *ngIf="!r.edit"> 
+                    <td>Id</td>
+                    <td>{{r.id}}</td>
+                </tr>
+                <tr *ngIf="!r.edit"> 
+                    <td>Slika</td>
+                    <td><img [src]="r.slika" height="150hx" width="110px" class="center"><br></td>
+                </tr>
+                
+                <!-- Prikaz unosa za uređivanje slike kada je radionica u režimu uređivanja -->
+                <tr *ngIf="r.edit">
+                    <div class="home-banner">
+                        <div class="banner-container">
+                            <button mat-stroked-button (click)="dodajSliku()">Izaberite sliku</button>
+                            <img [src]="slika" height="150hx" width="110px" class="center"><br>
+                        </div>
+                    </div>
+                </tr>
+
+                <!-- Nastavak prikaza ostalih polja sa uslovnim uređivanjem -->
+                <tr *ngIf="!r.edit"> 
+                    <td>Naziv</td>
+                    <td>{{r.naziv}}</td>
+                </tr>
+                <tr *ngIf="r.edit">
+                    <td><input matInput placeholder="Naziv" appInputStyle name="naziv" [(ngModel)]="naziv"></td>
+                </tr>
+                <tr *ngIf="!r.edit"> 
+                    <td>Datum</td>
+                    <td>{{r.datum}}</td>
+                </tr>
+                <tr *ngIf="r.edit">
+                    <td><input matInput placeholder="Datum" appInputStyle name="datum" [(ngModel)]="datum"></td>
+                </tr>
+                <!-- Dodati polja za mesto, opis, organizatora i galeriju -->
+                
+                <!-- Kontrola za promenu i brisanje radionice -->
+                <tr *ngIf="r.edit || !set">
+                    <td>Promeni: <input type="checkbox" [(ngModel)]="r.edit" (change)="podesi(r)"></td>
+                    <td *ngIf="r.edit"><button mat-button (click)="promeni()">Promeni</button></td>
+                </tr>
+                <tr>
+                    <td *ngIf="!r.edit"><button (click)="otkazi(r)">Obrisi radionicu</button></td>
+                </tr>
+                <hr>
+               </table>
+
+               <!-- Sekcija za dodavanje nove radionice -->
+               Dodaj novu:
+               <div class="home-banner">
+                    <div class="banner-container">
+                        <button mat-stroked-button (click)="dodajSliku_2()">Izaberite sliku</button>
+                        <img [src]="slika_2" height="150hx" width="110px" class="center"><br>
+                    </div>
+                </div> 
+                <input matInput placeholder="Naziv" appInputStyle name="naziv" [(ngModel)]="naziv_2">
+                <input matInput placeholder="Datum" appInputStyle name="datum" [(ngModel)]="datum_2">
+                <input matInput placeholder="Mesto" appInputStyle name="mesto" [(ngModel)]="mesto_2">
+                <td><input matInput placeholder="Opis" appInputStyle name="opis" [(ngModel)]="opis_2"></td>
+                <td><input matInput placeholder="Duzi opis" appInputStyle name="duzi_opis" [(ngModel)]="duzi_opis_2"></td>
+                <td><input matInput placeholder="Slobodna mesta" appInputStyle name="slobodna_mesta" [(ngModel)]="slobodna_mesta_2"></td>
+                <td><input matInput placeholder="Organizator" appInputStyle name="organizator" [(ngModel)]="organizator_2"></td>
+
+                <ul>
+                    <li *ngFor="let s of galerija_2" fxLayout="row">
+                        <img [src]="s" height="150hx" width="110px" class="center"><br>
+                        <button mat-button (click)="ukloni_2(s)">Ukloni</button>
+                    </li>
+                </ul>
+                <button mat-stroked-button (click)="dodajSlikuUGaleriju_2()">Izaberite sliku za dodavanje u galeriju</button>
+                <button mat-button (click)="dodaj()">Dodaj</button>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</body>

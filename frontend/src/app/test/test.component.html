@@ -1,0 +1,54 @@
+
+<button (click)="registracija()">Registruj se</button>
+<button (click)="logovanje()">Uloguj se</button><br>
+<table *ngIf="pret">
+    <th>Id</th>
+    <th>Slika</th>
+    <th>Naziv</th>
+    <th>Datum</th>
+    <th>Mesto</th>
+    <th>Opis</th>
+    <tr *ngFor="let r of radionice">
+        <td>{{r.id}}</td>
+        <td><img [src]="r.slika" height="100" >
+        </td>
+        <td>{{r.naziv}}</td>
+        <td>{{r.datum}}</td>
+        <td>{{r.mesto}}</td>
+        <td>{{r.opis}}</td>
+    </tr>
+   
+
+</table>
+<input type="text" name="pretraga_naziv" [(ngModel)]="pretraga_naziv">
+<input type="text" name="pretraga_mesto" [(ngModel)]="pretraga_mesto">
+<button (click)="pretraga()">Pretrazi</button>
+
+<div *ngIf="pret">
+    <table>
+        <th>Id</th>
+        <th>Slika</th>
+        <th>Naziv</th>
+        <th>Datum</th>
+        <th>Mesto</th>
+        <th>Opis</th>
+        <tr *ngFor="let r of pretrazene">
+            <td>{{r.id}}</td>
+            <td><img [src]="r.slika" height="100" >
+            </td>
+            <td>{{r.naziv}}</td>
+            <td>{{r.datum}}</td>
+            <td>{{r.mesto}}</td>
+            <td>{{r.opis}}</td>
+        </tr>
+       
+    
+    </table>
+</div>
+<button (click)="sortiraj_prema_nazivu()">Sortiraj prema nazivu</button>
+<button (click)="sortiraj_prema_datumu()">Sortiraj prema datumu</button>
+<button mat-button [matMenuTriggerFor]="aboveMenu">Above</button>
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu>

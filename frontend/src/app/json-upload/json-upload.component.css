@@ -1,0 +1,22 @@
+.largeartwork img.biggerwidth {
+    width: 300px;
+    height: auto;
+}
+.largeartwork img.biggerheight {
+    width: auto;
+    height:300px;
+}
+.largeartwork img.smallerwidth {
+    width: 100px;
+    height: auto;
+}
+.largeartwork img.smallerheight {
+    width: auto;
+    height:100px;
+}
+.velicina{
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 300px;
+    max-height: 300px;
+}

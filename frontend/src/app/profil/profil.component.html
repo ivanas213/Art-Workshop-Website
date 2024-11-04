@@ -1,0 +1,226 @@
+<header fxLayout="row">
+    <img mat-card-image [src]="logo" alt=""  class="logo">
+    <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+<body>
+    <div class="ispod" fxLayout="row">
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="profil()" >Profil</button>
+
+        <div fxFlex="72"></div>
+        <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova" (click)="registracija()">Registruj se</button>
+
+        <button mat-button *ngIf="tip=='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()" >Uloguj se</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="11" class="bela_slova" (click)="promena_lozinke()" >Promena lozinke</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="odjava()" >Odjava</button>
+
+    </div>
+  
+    <div>
+       
+
+    </div>
+      <mat-drawer-container class="example-container" *ngIf="tip=='ucesnik'">
+        <mat-drawer mode="side" opened><mat-card>
+            <mat-toolbar class="purple_white_center">
+                Podaci o korisniku
+            </mat-toolbar>
+            <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" appInputStyle>
+                  <output matOutput appOutputStyle  >Ime:{{korisnik.ime}} </output>
+                  <output matOutput appOutputStyle  >Prezime:{{korisnik.prezime}} </output>
+                  <output matOutput appOutputStyle  >Telefon:{{korisnik.telefon}} </output>
+                  <output matOutput appOutputStyle  >Email:{{korisnik.email}} </output>
+                  <output *ngIf="korisnik.tip=='organizator'" matOutput appOutputStyle  >Id organizacije:{{korisnik.id_organizacije}} </output>
+                  <output *ngIf="korisnik.tip=='organizator'" matOutput appOutputStyle  >Naziv organizacije:{{korisnik.ime_organizacije}} </output>
+                  <output *ngIf="korisnik.tip=='organizator'" matOutput appOutputStyle  >Adresa organizacije:{{korisnik.adresa_organizacije}} </output>
+         
+
+               
+                <button mat-raised-button type="submit" appInputStyle fxFlex="30" >Izmeni podatke</button>
+                <button *ngIf="izabrana_radionica" mat-raised-button appInputStyle  fxFlex="30" [routerLink]="['../chatinbox', {'radionica': izabrana_radionica}]">Izaberi radionicu</button>
+                <button *ngIf="!izabrana_radionica" disabled="true" mat-raised-button appInputStyle  fxFlex="30" [routerLink]="['../chatinbox', {'radionica': izabrana_radionica}]">Izaberi radionicu</button>
+
+                <select [(ngModel)]="izabrana_radionica" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let r of radionice" value="{{r.id}}">{{r.naziv}}</option>
+                </select>
+              </form>
+            
+        </mat-card></mat-drawer>
+        <mat-drawer-content>
+            <div fxLayoutAlign="center start" >
+                <output class="veliki_tekst_centar">Moje radionice</output>
+    
+              </div>
+    
+            <div fxLayoutAlign="center start" fxLayout="row" >
+            
+            <table matSort (matSortChange)="sortiraj_podatke($event)" fxFlex="60">
+                <tr>
+                  <th mat-sort-header="id">Id radionice</th>
+                  <th mat-sort-header="naziv">Naziv</th>
+                  <th mat-sort-header="datum">Datum</th>
+                  <th mat-sort-header="mesto">Mesto</th>
+                </tr>
+              
+                <tr *ngFor="let m of moje_radionice">
+                  <td >{{m.id}}</td>
+                  <td>{{m.naziv}}</td>
+                  <td>{{m.datum}}</td>
+                  <td>{{m.mesto}}</td>
+                </tr>
+              </table>
+
+          </div>
+          <hr>
+          <div fxLayoutAlign="center start" >
+            <output class="veliki_tekst_centar">Svidjanja</output>
+
+          </div>
+          <br>
+          <div  fxLayout="row" fxLayoutAlign="center stretch" class="flex-me"  >
+                <mat-card *ngFor="let r of radionice_koje_mi_se_svidjaju" fxFlex="17" >
+                    <img mat-card-image [src]="r.slika" alt="r.naziv">
+                    <mat-card-title class="naziv">{{r.naziv}}</mat-card-title>
+                    <mat-card-subtitle>{{r.mesto}}</mat-card-subtitle>
+                    <mat-card-subtitle>{{r.datum}}</mat-card-subtitle>
+            
+                    <mat-card-content>
+                        <p>
+                          {{r.opis}}
+                        </p>
+                      </mat-card-content>
+                </mat-card>
+              
+        </div>
+        <hr>
+        <div fxLayoutAlign="center start">
+            <output class="veliki_tekst_centar">Komentari</output>
+            <br>
+            <br>
+        </div>
+        <div fxLayoutAlign="center start" >
+            
+            
+            <mat-card *ngFor="let x of indeksi_komentara" fxFlex="17" >
+                <img mat-card-image [src]="radionice_koje_sam_komentarisao[x].slika" alt="r.naziv">
+                <mat-card-title class="naziv">{{radionice_koje_sam_komentarisao[x].naziv}}</mat-card-title>
+                <mat-card-subtitle>{{radionice_koje_sam_komentarisao[x].mesto}}</mat-card-subtitle>
+                <mat-card-subtitle>{{radionice_koje_sam_komentarisao[x].datum}}</mat-card-subtitle>
+        
+                <mat-card-content>
+                    <p>
+                      {{komentari[x]}}
+                    </p>
+                  </mat-card-content>
+            </mat-card>
+        </div>
+        
+        </mat-drawer-content>
+
+      </mat-drawer-container>
+      <mat-drawer-container class="example-container" *ngIf="tip=='organizator'">
+        <mat-drawer-content fxLayout="column"> 
+            <h2 class="veci_tekst_centar">Sve radionice:</h2>
+            <div *ngFor="let r of moje_radionice_o" fxLayout="row"><button mat-button  [routerLink]="['../chatinbox', {'radionica': r.id}]" >{{r.naziv}}</button>
+              <button mat-button (click)="izmeniInformacije(r)">Izmeni informacije</button>
+              <button mat-button (click)="vidiPrijave(r.id)">Vidi prijave</button>
+              <button mat-button (click)="otkazi(r.id)">Otkazi radionicu</button>
+              <button mat-button (click)="preuzmi(r)">Sacuvaj radionicu kao sablon</button>
+
+            </div>
+            <button mat-button (click)="napraviNovuRadionicu()" >Napravite novu radionicu</button>
+
+            <div *ngIf="flag">
+              
+              <div fxLayout="column" >
+                <button mat-stroked-button   (click)="dodajSliku()">Izaberite sliku</button>
+              <div class="home-banner">
+                <div class="banner-container">
+                    <img [src]="slika" height="150hx" width="110px" class="center"><br>
+    
+                </div>
+              </div>
+              
+                <input matInput type="text" placeholder="Naziv" name="naziv" appInputStyle [(ngModel)]="naziv" >
+                <input matInput type="text" placeholder="Datum" name="datum" appInputStyle [(ngModel)]="datum" >
+                <input matInput type="text" placeholder="Mesto" name="mesto" appInputStyle [(ngModel)]="mesto" >
+                <input matInput type="text" placeholder="Opis" name="opis" appInputStyle [(ngModel)]="opis" >
+                <input matInput type="text" placeholder="Duzi opis" name="duzi_opis" appInputStyle [(ngModel)]="duzi_opis" >
+                <input matInput type="text" placeholder="Slobodna mesta" name="slobodna_mesta" appInputStyle [(ngModel)]="slobodna_mesta" >
+                <ul id="ul-galerija">
+                  <li *ngFor="let s of galerija" fxLayout="row" >
+                    <img [src]="s" height="150hx" width="110px" class="center"><br>
+                    <button mat-button (click)="ukloni(s)">Ukloni</button>
+                  </li>
+                </ul>
+                <button mat-stroked-button   (click)="dodajSlikuUGaleriju()">Izaberite sliku za dodavanje u galeriju</button>
+                <button mat-stroked-button (click)="sacuvaj()"   >Sacuvajte izmene</button>
+              </div>
+              
+
+
+            </div>
+            
+            <div *ngIf="flag_2">
+              
+              <table >
+                <th>
+                  Id korisnika
+                </th>
+                
+                <th>
+                  Status
+                </th>
+                <tr *ngFor="let p of prijave">
+                  <td>{{p.idKorisnika}}</td>
+                  <td>{{p.status}}</td>
+                  <td *ngIf="p.status=='nov'">
+                    <button mat-stroked-button (click)="prihvati(p.id,p.idRadionice,p.idKorisnika)">Prihvati</button>
+                    <button mat-stroked-button (click)="odbij(p.id)">Odbij</button>
+
+                  </td>
+              
+                </tr>
+              </table>
+              
+
+
+            </div>
+            <div *ngIf="flag_3">
+              
+              <div fxLayout="column" >
+                <button mat-stroked-button   (click)="dodajSliku_2()">Izaberite sliku</button>
+              <div class="home-banner">
+                <div class="banner-container">
+                    <img [src]="slika_2" height="150hx" width="110px" class="center"><br>
+    
+                </div>
+              </div>
+              
+                <input matInput type="text" placeholder="Naziv" name="naziv" appInputStyle [(ngModel)]="naziv_2" >
+                <input matInput type="text" placeholder="Datum" name="datum" appInputStyle [(ngModel)]="datum_2" >
+                <input matInput type="text" placeholder="Mesto" name="mesto" appInputStyle [(ngModel)]="mesto_2" >
+                <input matInput type="text" placeholder="Opis" name="opis" appInputStyle [(ngModel)]="opis_2" >
+                <input matInput type="text" placeholder="Duzi opis" name="duzi_opis" appInputStyle [(ngModel)]="duzi_opis_2" >
+                <input matInput type="text" placeholder="Slobodna mesta" name="slobodna_mesta" appInputStyle [(ngModel)]="slobodna_mesta_2" >
+                <ul id="ul-galerija">
+                  <li *ngFor="let s of galerija_2" fxLayout="row" >
+                    <img [src]="s" height="150hx" width="110px" class="center"><br>
+                    <button mat-button (click)="ukloni_2(s)">Ukloni</button>
+                  </li>
+                </ul>
+                <button mat-stroked-button   (click)="dodajSlikuUGaleriju_2()">Izaberite sliku za dodavanje u galeriju</button>
+                <button mat-stroked-button   (click)="sablon()">Upotrebite sablon</button>
+
+                <button mat-stroked-button (click)="dodajRadionicu()"   >Sacuvajte</button>
+              </div>
+              
+
+
+            </div>
+       
+       
+        </mat-drawer-content>
+
+      </mat-drawer-container>
+      
+</body>

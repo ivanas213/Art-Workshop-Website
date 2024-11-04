@@ -1,0 +1,8 @@
+
+<input
+  style="display: none"
+  type="file" (change)="onFileChanged($event)"
+  #fileInput>
+<button mat-button (click)="fileInput.click()">Select File</button>
+<button mat-button (click)="onUpload()">Upload!</button>
+<button  mat-dialog-close >Zatvori</button>

@@ -1,0 +1,64 @@
+<header fxLayout="row">
+    <img mat-card-image [src]="logo" alt=""  class="logo">
+    <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+<body>
+    <div class="ispod" fxLayout="row">
+        <button mat-button *ngIf="tip=='ucesnik' || tip=='organizator'"  type="submit" fxFlex="7" class="bela_slova" (click)="profil()" >Profil</button>
+        <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="moje_radionice()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="korisnici()" >Korisnici</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="rad()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="predlog()" >Predlozi za radionice</button>
+
+        <div fxFlex="90"></div>
+        <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova" (click)="registracija()">Registruj se</button>
+
+        <button mat-button *ngIf="tip=='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()" >Uloguj se</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="promena_lozinke()" >Promena lozinke</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="odjava()" >Odjava</button>
+
+    </div>
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened></mat-drawer>
+        <mat-drawer-content>
+        
+        <div  fxLayout="row" fxLayoutAlign="stretch" class="flex-me" *ngIf="tip!='neregistrovan'"  >
+                <mat-card *ngFor="let r of radionice" fxFlex="17" [routerLink]="['radionica', {'radionica': r.id}]" >
+                    <img mat-card-image [src]="r.slika" alt="r.naziv">
+                    <mat-card-title class="naziv">{{r.naziv}}</mat-card-title>
+                    <mat-card-subtitle>{{r.mesto}}</mat-card-subtitle>
+                    <mat-card-subtitle>{{r.datum}}</mat-card-subtitle>
+            
+                    <mat-card-content>
+                        <p>
+                          {{r.opis}}
+                        </p>
+                      </mat-card-content>
+                </mat-card>
+            
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="stretch" class="flex-me" *ngIf="tip=='neregistrovan'" >
+            <mat-card *ngFor="let r of radionice" fxFlex="17" >
+                <img mat-card-image [src]="r.slika" alt="r.naziv" default="null">
+                <mat-card-title class="naziv">{{r.naziv}}</mat-card-title>
+                <mat-card-subtitle>{{r.mesto}}</mat-card-subtitle>
+                <mat-card-subtitle>{{r.datum}}</mat-card-subtitle>
+        
+                <mat-card-content>
+                    <p>
+                      {{r.opis}}
+                    </p>
+                  </mat-card-content>
+            </mat-card>
+        
+        </div>
+            
+            <div>
+                <button (click)="sortiraj_prema_nazivu()">Sortiraj prema nazivu</button>
+                <button (click)="sortiraj_prema_datumu()">Sortiraj prema datumu</button>
+            </div>
+        </mat-drawer-content>
+      </mat-drawer-container>
+    
+    
+</body>

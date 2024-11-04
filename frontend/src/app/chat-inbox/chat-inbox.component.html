@@ -1,0 +1,56 @@
+
+
+
+ <header fxLayout="row">
+  <img mat-card-image [src]="logo" alt=""  class="logo">
+  <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+<body>
+  <div class="ispod" fxLayout="row">
+      <button mat-button *ngIf="tip=='ucesnik' || tip=='organizator'"  type="submit" fxFlex="7" class="bela_slova" (click)="profil()" >Profil</button>
+      <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="moje_radionice()" >Radionice</button>
+      <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="korisnici()" >Korisnici</button>
+
+      <div fxFlex="90"></div>
+      <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova" (click)="registracija()">Registruj se</button>
+
+      <button mat-button *ngIf="tip=='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()" >Uloguj se</button>
+      <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="promena_lozinke()" >Promena lozinke</button>
+      <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="odjava()" >Odjava</button>
+
+  </div>
+  <mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened fxLayout="column">
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" appInputStyle *ngIf="korisnik.tip=='organizator'">
+          <select [(ngModel)]="izabraniKorisnik" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let k of korisnicii" value="{{k.id}}">{{k.korisnicko_ime}}</option>
+          </select>
+          <button  mat-raised-button appInputStyle (click)="izaberiKorisnika()">Izaberite korisnika</button>
+          
+
+
+        </form>
+       
+      </mat-drawer>
+      <mat-drawer-content>
+        <div class="chat-messages" >
+          <div class="chat-messages-show-container">
+            <ul class="chat-messages-show-list" id="message-list">
+            </ul>
+          </div>
+          <div class="chat-messages-create-container" *ngIf="prikaz"> 
+            <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
+            <button *ngIf="message"  class="chat-messages-create-button" (click)="SendMessage()"> Send </button>
+            <button  *ngIf="!message || message==''" disabled="true" class="chat-messages-create-button" (click)="SendMessage()"> Send </button>
+
+          </div>
+      
+      </div>
+          
+          
+      </mat-drawer-content>
+    </mat-drawer-container>
+  
+  
+</body>
+<script src="/socket.io/socket.io.js"></script>

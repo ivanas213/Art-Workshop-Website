@@ -1,0 +1,17 @@
+.example-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #555;
+  }
+.centrirano{
+    text-align: center;
+}
+button{
+    width: max-content;
+}
+.up{
+   min-height: 700px; 
+}
+.desno{
+    text-align: right;
+}

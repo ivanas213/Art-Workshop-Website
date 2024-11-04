@@ -1,0 +1,47 @@
+<header fxLayout="row">
+    <img mat-card-image [src]="logo" alt=""  class="logo">
+    <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+<body>
+    <div class="ispod" fxLayout="row">
+        <button mat-button *ngIf="tip=='ucesnik' || tip=='organizator'"  type="submit" fxFlex="7" class="bela_slova" (click)="profil()" >Profil</button>
+        <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="moje_radionice()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="korisnici()" >Korisnici</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="rad()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="predlog()" >Predlozi za radionice</button>
+
+        <div fxFlex="90"></div>
+        <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova" (click)="registracija()">Registruj se</button>
+
+        <button mat-button *ngIf="tip=='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()" >Uloguj se</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="promena_lozinke()" >Promena lozinke</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="odjava()" >Odjava</button>
+
+    </div>
+    <mat-drawer-container class="example-container" >
+        <mat-drawer mode="side" opened></mat-drawer>
+        <mat-drawer-content  fxLayoutAlign="center start" >
+            <div fxLayoutAlign="center start" fxLayout="column">
+                <div class="naziv_radionice" fxFlex="100" fxLayoutAlign="center center">{{radionica.naziv}}</div>
+                <div class="duzi_opis" >{{radionica.duzi_opis}}</div>
+                
+                    <table >
+                        <tr *ngFor="let s of slike_iz_galerije">
+                            <td *ngFor="let ss of s"><img mat-card-image [src]="ss" alt=""  ></td>
+                        </tr>
+                    </table>
+    </div>
+    <br>
+    <div>
+        
+        <button mat-raised-button appInputStyle   *ngIf="radionica.slobodna_mesta>0" (click)="prijaviSe()">Prijavi se</button>
+<br>
+        <button  mat-raised-button appInputStyle   [routerLink]="['../chatinbox', {'radionica': radionica.id}]">Caskaj sa organizatorom</button>
+    
+    </div>
+   
+        </mat-drawer-content>
+      </mat-drawer-container>
+
+    
+</body>

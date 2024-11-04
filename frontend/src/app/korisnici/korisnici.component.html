@@ -1,0 +1,200 @@
+<header fxLayout="row">
+    <img mat-card-image [src]="logo" alt=""  class="logo">
+    <div class="sajt">Umetničke radionice grada Beograda</div>
+</header>
+<body>
+    <div class="ispod" fxLayout="row">
+        <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="profil()" >Profil</button>
+        <button mat-button *ngIf="tip=='ucesnik'"  type="submit" fxFlex="7" class="bela_slova" (click)="moje_radionice()" >Radionice</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="korisnici()" style="background-color:#8956c8" >Korisnici</button>
+        <button mat-button *ngIf="tip=='admin'"  type="submit" fxFlex="7" class="bela_slova" (click)="rad()" >Radionice</button>
+
+        <div fxFlex="90"></div>
+        <button *ngIf="tip=='neregistrovan'" mat-button (click)="registracija()" fxFlex="7" class="bela_slova" (click)="registracija()">Registruj se</button>
+
+        <button mat-button *ngIf="tip=='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="logovanje()" >Uloguj se</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="promena_lozinke()" >Promena lozinke</button>
+        <button mat-button *ngIf="tip!='neregistrovan'"  type="submit" fxFlex="7" class="bela_slova" (click)="odjava()" >Odjava</button>
+
+    </div>
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened></mat-drawer>
+        <mat-drawer-content>
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Prikazi sve korisnike
+                    </mat-panel-title>
+                    
+                  </mat-expansion-panel-header>
+                  <table matTable fxFlex="100"  >
+                    <th  scope="col">Slika</th>
+                    <th  scope="col">Id</th>
+                    <th  scope="col">Ime</th>
+                    <th  scope="col">Prezime</th>
+                    <th  scope="col">Korisnicko ime</th>
+                    <th  scope="col">Lozinka</th>
+                    <th  scope="col">Tip</th>
+                    <th  scope="col">Telefon</th>
+                    <th  scope="col">Email</th>
+                    <th  scope="col">Naziv organizacije</th>
+                    <th  scope="col">Adresa sedista organizacije</th>
+                    <th  scope="col">Maticni broj organizacije</th>
+           
+          
+            <tr *ngFor="let k of svi_korisnici">
+                <td *ngIf="!k.edit"><img mat-card-image [src]="k.slika"></td>
+                <td *ngIf="k.edit"><div class="home-banner">
+                  <div class="banner-container">
+                      <button mat-stroked-button   (click)="dodajSliku_2()">Izaberite sliku </button>
+                      <img [src]="slika_2" height="150hx" width="110px" class="center"><br>
+      
+                  </div>
+                </div>  </td>
+
+                <td *ngIf="!k.edit">{{k.id}}</td>
+                <td *ngIf="k.edit">{{k.id}}</td>
+
+                <td *ngIf="!k.edit">{{k.ime}}</td>
+                <td *ngIf="k.edit"> <input matInput placeholder="Ime" appInputStyle name="ime" [(ngModel)]="ime_2" ></td>
+
+                <td *ngIf="!k.edit">{{k.prezime}}</td>
+                <td *ngIf="k.edit"><input matInput type="text" placeholder="Prezime" name="prezime" appInputStyle [(ngModel)]="prezime_2" ></td>
+
+                <td *ngIf="!k.edit">{{k.korisnicko_ime}}</td>
+                <td *ngIf="k.edit"><input matInput type="text" placeholder="Korisnicko ime" name="korisnicko_ime" appInputStyle [(ngModel)]="korisnicko_imee_2"></td>
+
+                <td *ngIf="!k.edit">{{k.lozinka}}</td>
+                <td *ngIf="k.edit"><input matInput type="password" placeholder="Lozinka" name="lozinka" appInputStyle [(ngModel)]="lozinkaa_2"></td>
+
+                <td >{{k.tip}}</td>
+
+                <td *ngIf="!k.edit">{{k.telefon}}</td>
+                <td *ngIf="k.edit"><input matInput fxLayout="5"  type="text" name="telefon" placeholder="Telefon" appInputStyle [(ngModel)]="telefon_2" ></td>
+
+                <td *ngIf="!k.edit">{{k.email}}</td>
+                <td *ngIf="k.edit"> <input matInput type="text" name="email" placeholder="Email" appInputStyle [(ngModel)]="email_2" default="k.email"></td>
+
+                <td *ngIf="!k.edit">{{k.ime_organizacije}}</td>
+                <td *ngIf="k.edit && k.tip=='organizator'"><input matInput type="text" name="naziv_org" placeholder="Naziv organizacije" appInputStyle [(ngModel)]="naziv_organizacije_2"></td>
+
+                <td *ngIf="!k.edit">{{k.adresa_organizacije}}</td>   
+                <td *ngIf="k.edit && k.tip=='organizator'"><input fxLayout="10" matInput type="text" name="adresa_org" placeholder="Adresa sedista organizacije" appInputStyle [(ngModel)]="adresa_organizacije_2"  ></td>   
+
+                <td *ngIf="!k.edit">{{k.id_organizacije}}</td>
+                <td *ngIf="k.edit && k.tip=='organizator'"><input matInput type="text" name="id_org" placeholder="Maticni broj organizacije" appInputStyle [(ngModel)]="id_organizacije_2"  ></td>
+
+                <td><input type="checkbox" [(ngModel)]="k.edit"  (change)="podesi(k)">Azuriraj</td>
+                <td *ngIf="k.edit"><button (click)="azuriraj(k.id)">Azuriraj</button></td>
+
+                <td *ngIf="!k.edit"><button (click)="obrisiKorisnika(k.id)">Obrisi</button></td>
+            </tr>
+            
+          </table>
+          {{greskaa}}
+          
+                </mat-expansion-panel>
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Dodaj korisnika
+                        </mat-panel-title>
+                        
+                      </mat-expansion-panel-header>
+                      <table>
+                        <tr>
+                          <td>      <div class="home-banner">
+                              <div class="banner-container">
+                                  <button mat-stroked-button   (click)="dodajSliku()">Izaberite sliku </button>
+                                  <img [src]="slika" height="150hx" width="110px" class="center"><br>
+                  
+                              </div>
+                            </div>     
+                          </td>
+                          <td></td>
+                          <td>            <input matInput placeholder="Ime" appInputStyle name="ime" [(ngModel)]="ime" >
+                          </td>
+                          <td>             <input matInput type="text" placeholder="Prezime" name="prezime" appInputStyle [(ngModel)]="prezime" >
+                          </td>
+                          <td>            <input matInput type="text" placeholder="Korisnicko ime" name="korisnicko_ime" appInputStyle [(ngModel)]="korisnicko_imee"  >
+                          </td>
+                          <td>            <input matInput type="password" placeholder="Lozinka" name="lozinka" appInputStyle [(ngModel)]="lozinka"  >
+                          </td>
+                          <td><mat-checkbox  [(ngModel)]="organizator" name="org" >
+                              Organizator
+                        </mat-checkbox></td>
+                          <td><input matInput type="text" name="telefon" placeholder="Telefon" appInputStyle [(ngModel)]="telefon" ></td>
+                          <td>            <input matInput type="text" name="email" placeholder="Email" appInputStyle [(ngModel)]="email"  >
+                          </td>
+                          <td *ngIf="organizator"> <input matInput type="text" name="naziv_org" placeholder="Naziv organizacije" appInputStyle [(ngModel)]="naziv_organizacije"></td>
+                          <td *ngIf="organizator"> <input matInput type="text" name="adresa_org" placeholder="Adresa sedista organizacije" appInputStyle [(ngModel)]="adresa_organizacije"  ></td>
+                          <td *ngIf="organizator"> <input matInput type="text" name="id_org" placeholder="Maticni broj organizacije" appInputStyle [(ngModel)]="id_organizacije"  >
+                          </td>
+                          <td></td>
+                          <td></td>
+                          <td><button (click)="dodajKorisnika()"> Dodaj korisnika</button></td>
+                      </tr>
+                  </table>
+                    </mat-expansion-panel>
+                   
+                  </mat-accordion>
+              </mat-accordion>
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Prikazi sve zahteve
+                    </mat-panel-title>
+                   
+                  </mat-expansion-panel-header>
+                  <table matTable fxFlex="100"  >
+                    <th  scope="col">Slika</th>
+                    <th  scope="col">Id</th>
+                    <th  scope="col">Ime</th>
+                    <th  scope="col">Prezime</th>
+                    <th  scope="col">Korisnicko ime</th>
+                    <th  scope="col">Lozinka</th>
+                    <th  scope="col">Tip</th>
+                    <th  scope="col">Telefon</th>
+                    <th  scope="col">Email</th>
+                    <th  scope="col">Naziv organizacije</th>
+                    <th  scope="col">Adresa sedista organizacije</th>
+                    <th  scope="col">Maticni broj organizacije</th>
+                    <th  scope="col">Status</th>
+
+           
+          
+            <tr *ngFor="let k of zahtevi">
+                <td><img mat-card-image [src]="k.slika"></td>
+                <td>{{k.id}}</td>
+                <td>{{k.ime}}</td>
+                <td>{{k.prezime}}</td>
+                <td>{{k.korisnicko_ime}}</td>
+                <td>{{k.lozinka}}</td>
+                <td>{{k.tip}}</td>
+                <td>{{k.telefon}}</td>
+                <td>{{k.email}}</td>
+                <td>{{k.ime_organizacije}}</td>
+                <td>{{k.adresa_organizacije}}</td>   
+                <td>{{k.id_organizacije}}</td>
+                <td>{{k.status}}</td>
+                <td><button *ngIf="k.status=='nov'" (click)="prihvati(k)">Prihvati</button></td>
+                <td><button *ngIf="k.status=='nov'" (click)="odbij(k.id)">Odbij</button></td>
+
+            </tr>
+            <tr>
+                
+               
+                
+            </tr>
+          </table>
+                </mat-expansion-panel>
+               
+              </mat-accordion>
+        </mat-drawer-content>
+      </mat-drawer-container>
+    
+    
+</body>

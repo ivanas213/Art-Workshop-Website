@@ -1,0 +1,20 @@
+<div fxLayoutAlign="center center" fxFlexFill >
+    <mat-card fxFlex="25">
+        <mat-toolbar class="purple_white_center">
+            Promena lozinke
+        </mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" appInputStyle>
+            <mat-form-field>
+              <input matInput type="password" placeholder="Stara lozinka"appInputStyle [(ngModel)]="stara_lozinka" [ngModelOptions]="{standalone: true}" >
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="password" placeholder="Nova lozinka" appInputStyle [(ngModel)]="nova_lozinka" [ngModelOptions]="{standalone: true}" >
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Potvrda nove lozinke" appInputStyle [(ngModel)]="nova_lozinka_potvrda" [ngModelOptions]="{standalone: true}" >
+              </mat-form-field>
+            <button mat-raised-button type="submit" appInputStyle (click)="promeniLozinku()">Promeni lozinku</button>
+        </form>
+        {{lozinka_greska}}
+    </mat-card>
+  </div>

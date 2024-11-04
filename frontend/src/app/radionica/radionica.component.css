@@ -1,0 +1,75 @@
+img{
+    height: 300px;
+    width:200px;
+}
+.flex-me 
+{   display: inline-flex; 
+  flex-flow: row wrap;    
+}
+mat-card{
+    width: fit-content;
+}
+imgs {
+    height: 50px;
+    width: 50px;
+}
+:host ::ng-deep .mat-card{
+
+    border: 55px solid #000;
+    border-radius: 20px !important;
+    border: #000 !important;
+   }
+mat-card-title{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+mat-card-subtitle{
+    font-style: italic;
+    justify-content: right;
+}
+.logo{
+    padding-left: 550px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    color: red;
+    
+}
+header{
+    background-color: #a981db;
+}
+.sajt{
+    color:white;
+    padding-top: 40px;
+    font-size: larger;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+.ispod{
+    background-color: #8e59d0;
+}
+.bela_slova{
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+}
+.example-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #555;
+  }
+.naziv_radionice{
+    font-size: xx-large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: oblique;
+    padding-top: 10px;
+    text-align: center;
+    justify-content: center;
+}
+.duzi_opis{
+    font-size: large;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style:inherit;
+    padding-top: 20px;
+}

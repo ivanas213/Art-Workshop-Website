@@ -1,0 +1,42 @@
+.purple_white_center{
+    color:white;
+    background-color:#a981db;
+    justify-content: center;
+
+}
+
+input {
+    display: block;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: #333333;
+    --placeHolder-color: #959595;
+  }
+
+  input::placeholder {
+    color: var(--placeHolder-color);
+  }
+  input::-webkit-input-placeholder { /* Edge */
+    color: var(--placeHolder-color);
+  }
+
+  input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--placeHolder-color);
+  }
+
+  input:-moz-placeholder {
+    color: var(--placeHolder-color);
+  }
+
+  input::-moz-placeholder {
+    color: var(--placeHolder-color);
+  }
+
+  mat-form-field input::placeholder {
+    opacity: 1 !important;
+    color: #a981db !important;
+ }
+ .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+  }

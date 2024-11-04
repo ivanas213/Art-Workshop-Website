@@ -1,0 +1,46 @@
+<div fxLayoutAlign="center center" fxFlexFill>
+    <!-- Kartica za logovanje koja zauzima 25% širine -->
+    <mat-card fxFlex="25">
+        <!-- Toolbar sa stilom "purple_white_center" i tekstom "Logovanje" -->
+        <mat-toolbar class="purple_white_center">
+            Logovanje
+        </mat-toolbar>
+        
+        <!-- Forma za unos korisničkog imena i lozinke, sa prilagođenim stilom i postavkom elemenata u kolonu -->
+        <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" appInputStyle>
+            
+            <!-- Polje za unos korisničkog imena -->
+            <mat-form-field>
+              <input 
+                matInput 
+                placeholder="Korisnicko ime"
+                appInputStyle 
+                [(ngModel)]="korisnicko_ime" 
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            
+            <!-- Polje za unos lozinke -->
+            <mat-form-field>
+              <input 
+                matInput 
+                type="password" 
+                placeholder="Lozinka" 
+                appInputStyle 
+                [(ngModel)]="lozinka" 
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            
+            <!-- Dugme za logovanje koje poziva funkciju logovanje() na klik -->
+            <button 
+              mat-raised-button 
+              type="submit" 
+              appInputStyle 
+              (click)="logovanje()">
+              Uloguj se
+            </button>
+        </form>
+        
+        <!-- Prikaz greške ako postoji -->
+        {{greska}}
+    </mat-card>
+</div>

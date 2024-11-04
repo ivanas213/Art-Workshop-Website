@@ -1,0 +1,84 @@
+.logo{
+    padding-left: 550px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    color: red;
+    
+}
+header{
+    background-color: #a981db;
+}
+.sajt{
+    color:white;
+    padding-top: 40px;
+    font-size: larger;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+.ispod{
+    background-color: #8e59d0;
+}
+.bela_slova{
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+}
+table {
+    width:90%;
+    padding: 20px;
+    
+      
+  }
+  .mat-table{
+    font-family: 'Times New Roman', Times, serif;
+  }
+  th{
+    background-color: #8e59d0;
+    border: 0px;
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    table-layout: inherit;
+  }
+  
+  tr.mat-header-row{
+    height:35px;
+  }
+  tr.mat-row::nth-child(even){
+    background-color: rgba(0, 179, 166, 0.04);
+  }
+  tr.met-row{
+    height: 30px;
+  }
+  td.mat-cell{
+    border-bottom: 1px,solid red;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .mat-sort-header-container {
+    align-items: center;
+  }
+
+  .example-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #555;
+  }
+  .veliki_tekst_centar{
+    text-align: center;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .veci_tekst_centar{
+    text-align: center;
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .flex-me 
+{   display: inline-flex; 
+  flex-flow: row wrap;    
+}
